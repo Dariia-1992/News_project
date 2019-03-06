@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad.network;
+package com.dariia.test_work_for_cleveroad.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

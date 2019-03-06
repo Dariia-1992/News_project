@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad.model;
+package com.dariia.test_work_for_cleveroad.model;
 
 public class Article {
 

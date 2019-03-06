@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad;
+package com.dariia.test_work_for_cleveroad;
 
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.test_work_for_cleveroad.adpter.NewsRecycleAdapter;
-import com.example.test_work_for_cleveroad.model.Article;
-import com.example.test_work_for_cleveroad.model.ArticlesResponse;
-import com.example.test_work_for_cleveroad.network.ArticlesListAPI;
-import com.example.test_work_for_cleveroad.network.ArticlesListRetrofit;
+import com.dariia.test_work_for_cleveroad.adpter.NewsRecycleAdapter;
+import com.dariia.test_work_for_cleveroad.model.Article;
+import com.dariia.test_work_for_cleveroad.model.ArticlesResponse;
+import com.dariia.test_work_for_cleveroad.network.ArticlesListAPI;
+import com.dariia.test_work_for_cleveroad.network.ArticlesListRetrofit;
 
 import java.util.ArrayList;
 import java.util.List;

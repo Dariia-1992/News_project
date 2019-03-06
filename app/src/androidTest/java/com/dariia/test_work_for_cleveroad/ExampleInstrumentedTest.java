@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad;
+package com.dariia.test_work_for_cleveroad;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

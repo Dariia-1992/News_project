@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad.adpter;
+package com.dariia.test_work_for_cleveroad.adpter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.test_work_for_cleveroad.R;
-import com.example.test_work_for_cleveroad.model.Article;
+import com.dariia.test_work_for_cleveroad.R;
+import com.dariia.test_work_for_cleveroad.model.Article;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 

@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad;
+package com.dariia.test_work_for_cleveroad;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.test_work_for_cleveroad.model.Article;
+import com.dariia.test_work_for_cleveroad.model.Article;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

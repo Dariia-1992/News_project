@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test_work_for_cleveroad">
+    package="com.dariia.test_work_for_cleveroad">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ArticleDescriptionActivity"
+            android:name="com.dariia.test_work_for_cleveroad.ArticleDescriptionActivity"
             android:label="@string/title_activity_article_description"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.dariia.test_work_for_cleveroad.MainActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.dariia.test_work_for_cleveroad.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

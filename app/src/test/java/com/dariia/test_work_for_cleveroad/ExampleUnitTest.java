@@ -1,4 +1,4 @@
-package com.example.test_work_for_cleveroad;
+package com.dariia.test_work_for_cleveroad;
 
 import org.junit.Test;
 
