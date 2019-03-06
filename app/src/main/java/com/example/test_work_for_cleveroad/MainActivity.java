@@ -1,5 +1,7 @@
 package com.example.test_work_for_cleveroad;
 
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,11 +9,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.test_work_for_cleveroad.adpter.NewsRecycleAdapter;
 import com.example.test_work_for_cleveroad.model.Article;
-import com.example.test_work_for_cleveroad.model.ListArticles;
+import com.example.test_work_for_cleveroad.model.ArticlesResponse;
 import com.example.test_work_for_cleveroad.network.ArticlesListAPI;
 import com.example.test_work_for_cleveroad.network.ArticlesListRetrofit;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,35 +22,58 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private List<Article> mList = new ArrayList<>();
+    private SwipeRefreshLayout mSwipe;
+
+    public static List<Article> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new NewsRecycleAdapter(mList);
-        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        mSwipe = findViewById(R.id.swipe);
 
-        ArticlesListAPI listAPI = ArticlesListRetrofit.getApiService();
-        Call<ListArticles> call = listAPI.getArticles(ArticlesListRetrofit.API_KEY, "android");
-        call.enqueue(new Callback<ListArticles>() {
-            @Override
-            public void onResponse(Call<ListArticles> call, Response<ListArticles> response) {
-                mList.clear();
-                mList.addAll(response.body().getArticles());
-                mAdapter.notifyDataSetChanged();
-            }
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        mAdapter = new NewsRecycleAdapter(mList, mOnItemSelected);
+        recyclerView.setAdapter(mAdapter);
+        loadArticles();
 
+        mSwipe.setRefreshing(true);
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onFailure(Call<ListArticles> call, Throwable t) {
-                int a = 10;
+            public void onRefresh() {
+                loadArticles();
             }
         });
     }
+
+    private void loadArticles(){
+        ArticlesListAPI listAPI = ArticlesListRetrofit.getApiService();
+        Call<ArticlesResponse> call = listAPI.getArticles(ArticlesListRetrofit.API_KEY, "android");
+        call.enqueue(new Callback<ArticlesResponse>() {
+            @Override
+            public void onResponse(Call<ArticlesResponse> call, Response<ArticlesResponse> response) {
+                mList.clear();
+                mList.addAll(response.body().getArticles());
+                mAdapter.notifyDataSetChanged();
+                mSwipe.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(Call<ArticlesResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    private final NewsRecycleAdapter.OnItemSelected mOnItemSelected = new NewsRecycleAdapter.OnItemSelected() {
+        @Override
+        public void onItemSelected(int position) {
+            Intent intent = new Intent(MainActivity.this, ArticleDescriptionActivity.class);
+            intent.putExtra(ArticleDescriptionActivity.EXTRA_POSITION, position);
+            startActivity(intent);
+        }
+    };
+
 }

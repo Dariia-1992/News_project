@@ -2,13 +2,13 @@ package com.example.test_work_for_cleveroad.model;
 
 import java.util.List;
 
-public class ListArticles {
+public class ArticlesResponse {
 
     private String status;
     private int totalResults;
     private List<Article> articles;
 
-    public ListArticles(String status, int totalResults, List<Article> articles) {
+    public ArticlesResponse(String status, int totalResults, List<Article> articles) {
         this.status = status;
         this.totalResults = totalResults;
         this.articles = articles;

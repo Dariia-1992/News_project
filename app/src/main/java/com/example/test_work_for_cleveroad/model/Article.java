@@ -85,10 +85,4 @@ public class Article {
     public void setContent(String content) {
         this.content = content;
     }
-
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [publishedAt = "+publishedAt+", author = "+author+", urlToImage = "+urlToImage+", description = "+description+", source = "+source+", title = "+title+", url = "+url+", content = "+content+"]";
-    }
 }

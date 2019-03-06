@@ -24,9 +24,4 @@ public class Source {
     public void setName(String name) {
         this.name = name;
     }
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [name = "+name+", id = "+id+"]";
-    }
 }

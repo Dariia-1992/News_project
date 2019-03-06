@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.test_work_for_cleveroad.R;
 import com.example.test_work_for_cleveroad.model.Article;
 
@@ -15,10 +16,16 @@ import java.util.List;
 
 public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.ViewHolder> {
 
-    private List<Article> mArticleList;
+    public interface OnItemSelected{
+        void onItemSelected(int position);
+    }
 
-    public NewsRecycleAdapter(List<Article> articleList) {
+    private List<Article> mArticleList;
+    private OnItemSelected mListener;
+
+    public NewsRecycleAdapter(List<Article> articleList, OnItemSelected listener) {
         mArticleList = articleList;
+        mListener = listener;
     }
 
     @NonNull
@@ -30,11 +37,22 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Article article = mArticleList.get(i);
         viewHolder.mTitle.setText(article.getTitle());
-      //  viewHolder.mDescription.setText(article.getDescription());
-        //viewHolder.mImageTitle = article.getUrlToImage();
+        viewHolder.mDescription.setText(article.getDescription());
+
+        Glide.with(viewHolder.itemView)
+                .load(article.getUrlToImage())
+                .into(viewHolder.mImageTitle);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mListener != null)
+                    mListener.onItemSelected(i);
+            }
+        });
     }
 
     @Override
