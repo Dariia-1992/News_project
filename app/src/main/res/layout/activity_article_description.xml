@@ -26,21 +26,61 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18dp"/>
-            <ImageView
-                android:id="@+id/image_description"
-                android:layout_width="wrap_content"
+
+            <RelativeLayout
+                android:id="@+id/author_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_articles"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"/>
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp">
+                <ImageView
+                    android:id="@+id/clock"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/clock"/>
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/clock"
+                    android:textStyle="italic"
+                    />
+                <ImageView
+                    android:id="@+id/author_icon"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/author"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/author"/>
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="italic"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/image_description"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:layout_below="@id/author_date" />
 
             <TextView
-                android:id="@+id/content_articles"
+                android:id="@+id/description_articles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/image_description"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
                 android:textColor="@color/colorText"
                 android:textSize="14dp"
                 tools:ignore="UnknownId" />
@@ -54,6 +94,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:text="@string/button_click"/>
 

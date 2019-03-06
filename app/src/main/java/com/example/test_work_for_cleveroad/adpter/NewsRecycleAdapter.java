@@ -12,7 +12,13 @@ import com.bumptech.glide.Glide;
 import com.example.test_work_for_cleveroad.R;
 import com.example.test_work_for_cleveroad.model.Article;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.ViewHolder> {
 
@@ -40,7 +46,10 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Article article = mArticleList.get(i);
         viewHolder.mTitle.setText(article.getTitle());
-        viewHolder.mDescription.setText(article.getDescription());
+
+
+        viewHolder.mDate.setText(getPrettyTime(article.getPublishedAt()));
+        viewHolder.mAuthor.setText(article.getAuthor());
 
         Glide.with(viewHolder.itemView)
                 .load(article.getUrlToImage())
@@ -60,16 +69,32 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
         return mArticleList != null ? mArticleList.size() : 0;
     }
 
+    private String getPrettyTime(String date) {
+        try {
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            sdf.setCalendar(cal);
+            cal.setTime(sdf.parse(date));
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY/dd/MM HH:mm a");
+            return dateFormat.format(cal.getTime());
+        } catch (Exception ex) {
+            return date;
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTitle;
-        TextView mDescription;
         ImageView mImageTitle;
+        TextView mDate;
+        TextView mAuthor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mTitle = itemView.findViewById(R.id.title_tv);
-            mDescription = itemView.findViewById(R.id.description_tv);
             mImageTitle = itemView.findViewById(R.id.image_article);
+            mDate = itemView.findViewById(R.id.date);
+            mAuthor = itemView.findViewById(R.id.author);
         }
     }
 }
